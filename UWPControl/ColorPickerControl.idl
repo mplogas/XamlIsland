@@ -1,0 +1,17 @@
+namespace UWPControl
+{
+    [default_interface]
+    runtimeclass ColorPickerControl : Windows.UI.Xaml.Controls.Panel
+    {
+		ColorPickerControl();
+
+		static Windows.UI.Xaml.DependencyProperty RProperty{ get; };
+		static Windows.UI.Xaml.DependencyProperty GProperty{ get; };
+		static Windows.UI.Xaml.DependencyProperty BProperty{ get; };
+
+
+		Double R;
+		Double G;
+		Double B;
+    }
+}
