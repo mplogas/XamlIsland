@@ -1,0 +1,108 @@
+﻿<winui:Panel
+    x:Class="ModernUI3.ColorPickerControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:local="using:ModernUI"
+    xmlns:shapes="using:Microsoft.UI.Xaml.Shapes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Black">
+    <Grid>
+        <Path StrokeThickness="5" x:Name="colorLine" StrokeStartLineCap="Triangle" StrokeEndLineCap="Round">
+            <Path.Stroke>
+                <LinearGradientBrush>
+                    <GradientStop Offset="0" Color="Black"></GradientStop>
+                    <GradientStop Offset="1" Color="Red"></GradientStop>
+                </LinearGradientBrush>
+            </Path.Stroke>
+            <Path.RenderTransform>
+                <CompositeTransform CenterX="200" CenterY="200" Rotation="315" ScaleX=".25" ScaleY="0.25"></CompositeTransform>
+            </Path.RenderTransform>
+            <Path.Data>
+                <LineGeometry StartPoint="0,0" EndPoint="1,0">
+                    <LineGeometry.Transform>
+                        <CompositeTransform TranslateX="200" TranslateY="200" ScaleX="150" ScaleY="150"/>
+                    </LineGeometry.Transform>
+                </LineGeometry>
+            </Path.Data>
+        </Path>
+        <Path Stroke="DarkGray" StrokeThickness="0.5" x:Name="crossHair">
+            <Path.Data>
+                <GeometryGroup>
+                    <GeometryGroup.Transform>
+                        <CompositeTransform TranslateX="200" TranslateY="200" ScaleX="200" ScaleY="200"/>
+                    </GeometryGroup.Transform>
+                    <LineGeometry EndPoint="-0.75,0" StartPoint="0.75,0"></LineGeometry>
+                    <LineGeometry EndPoint="0,0.75" StartPoint="0,-0.75"></LineGeometry>
+                </GeometryGroup>
+            </Path.Data>
+        </Path>
+        
+        <Path Stroke="White" StrokeThickness="1" x:Name="pickerCircle">
+            <Path.Data>
+                <EllipseGeometry RadiusX="0.2" RadiusY="0.2">
+                    <EllipseGeometry.Transform>
+                        <CompositeTransform TranslateX="230" TranslateY="170" ScaleX="200" ScaleY="200"/>
+                    </EllipseGeometry.Transform>
+                </EllipseGeometry>
+            </Path.Data>
+        </Path>
+        <Path Stroke="White" Fill="Transparent" StrokeThickness="1" x:Name="pickerPositionMarker" PointerEntered="Marker_PointerEntered" PointerExited="Marker_PointerExited">
+            <Path.Data>
+                <EllipseGeometry RadiusX="4" RadiusY="4" x:Name="pickerMarker">
+                    <EllipseGeometry.Transform>
+                        <CompositeTransform TranslateX="230" TranslateY="170"/>
+                    </EllipseGeometry.Transform>
+                </EllipseGeometry>
+            </Path.Data>
+        </Path>
+
+        <Path Stroke="White" Fill="Black" StrokeThickness="1" x:Name="pickerSizeMarker"  PointerEntered="Marker_PointerEntered" PointerExited="Marker_PointerExited">
+            <Path.RenderTransform>
+                <!-- Color picker position and rotationangle  -->
+                <CompositeTransform TranslateX="230" TranslateY="170" Rotation="315">
+                </CompositeTransform>
+            </Path.RenderTransform>
+            <Path.Data>
+                <RectangleGeometry Rect="-4,-4,8,8">
+                    <RectangleGeometry.Transform>
+                        <!-- Color picker radius -->
+                        <CompositeTransform TranslateX="40" Rotation="45"></CompositeTransform>
+                    </RectangleGeometry.Transform>
+                </RectangleGeometry>
+            </Path.Data>
+        </Path>
+        <!--
+        <Path Stroke="Gray" StrokeThickness="0.5" x:Name="secondMarkerCircle">
+            <Path.RenderTransform>
+                <TranslateTransform X="100" Y="-50"></TranslateTransform>
+            </Path.RenderTransform>
+            <Path.Data>
+                <EllipseGeometry RadiusX="0.4" RadiusY="0.4">
+                    <EllipseGeometry.Transform>
+                        <CompositeTransform TranslateX="200" TranslateY="200" ScaleX="200" ScaleY="200"/>
+                    </EllipseGeometry.Transform>
+                </EllipseGeometry>
+            </Path.Data>
+        </Path>
+        -->
+        <Path x:Name="colorGradient">
+            <Path.Fill>
+                <ImageBrush></ImageBrush>
+            </Path.Fill>
+            <Path.Data>
+                <GeometryGroup>
+                    <GeometryGroup.Transform>
+                        <CompositeTransform TranslateX="200" TranslateY="200" ScaleX="200" ScaleY="200"/>
+                    </GeometryGroup.Transform>
+                    <EllipseGeometry RadiusX="0.8" RadiusY="0.8">
+                    </EllipseGeometry>
+                    <EllipseGeometry RadiusX="1.0" RadiusY="1.0">
+                    </EllipseGeometry>
+                </GeometryGroup>
+            </Path.Data>
+        </Path>
+    </Grid>
+</winui:Panel>

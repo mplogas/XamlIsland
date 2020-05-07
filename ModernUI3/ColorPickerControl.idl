@@ -1,0 +1,18 @@
+
+namespace ModernUI3
+{
+	[default_interface]
+	runtimeclass ColorPickerControl : Microsoft.UI.Xaml.Controls.Panel
+	{
+		ColorPickerControl();
+		
+		static Microsoft.UI.Xaml.DependencyProperty RProperty{ get; };
+		static Microsoft.UI.Xaml.DependencyProperty GProperty{ get; };
+		static Microsoft.UI.Xaml.DependencyProperty BProperty{ get; };
+		
+
+		Double R;
+		Double G;
+		Double B;
+	}
+}

@@ -111,6 +111,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="NumberConverter.cs" />
     <Compile Include="ColorPickerControl.xaml.cs">
       <DependentUpon>ColorPickerControl.xaml</DependentUpon>
     </Compile>
@@ -151,6 +152,12 @@
     <Content Include="images\icon_back.png" />
     <Content Include="images\top_left.png" />
     <Content Include="images\top_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModernUI3\ModernUI3.vcxproj">
+      <Project>{eb1356a6-58b4-46bc-8dbd-ac821af7528b}</Project>
+      <Name>ModernUI3</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '$(MinimumVisualStudioVersion)' ">
     <VisualStudioVersion>$(MinimumVisualStudioVersion)</VisualStudioVersion>

@@ -3,6 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WinUIControl"
+    xmlns:modernui="using:ModernUI3"
+    xmlns:winui="using:Microsoft.UI.Xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -27,6 +29,7 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
+        <local:NumberConverter x:Key="converter" />
     </UserControl.Resources>
     <Grid Padding="10" Background="#1F1F1F" Width="220" Height="274">
         <Grid.RowDefinitions>
@@ -45,7 +48,8 @@
                 <Image Source="images/icon_back.png" />
             </Button>
         </Grid>
-        <Image Grid.Row="1" Source="images/colorpicker_dummy.png" />
+        <!--<Image Grid.Row="1" Source="images/colorpicker_dummy.png" />-->
+        <modernui:ColorPickerControl  Grid.Row="1" Height="200" Width="200" R="{x:Bind ViewModel.R, Mode=TwoWay}" G="{x:Bind ViewModel.G, Mode=TwoWay}" B="{x:Bind ViewModel.B, Mode=TwoWay}" Background="#1F1F1F" />
         <Grid Grid.Row="2" Padding="0,7,0,5" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="48"/>
@@ -59,7 +63,8 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="R" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.R, Mode=TwoWay}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.R, Mode=TwoWay, Converter={StaticResource ResourceKey=converter}}" />
+                <!--<winui:NumberBox  Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.R, Mode=TwoWay}" />-->
             </Grid>
             <Grid Grid.Column="1" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -67,7 +72,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="G" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.G, Mode=TwoWay}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.G, Mode=TwoWay, Converter={StaticResource ResourceKey=converter}}" />
             </Grid>
             <Grid Grid.Column="2" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -75,7 +80,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="B" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.B, Mode=TwoWay}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.B, Mode=TwoWay, Converter={StaticResource ResourceKey=converter}}" />
             </Grid>
             <Grid Grid.Column="3" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -83,7 +88,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Y" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.Y, Mode=TwoWay}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.Y, Mode=TwoWay, Converter={StaticResource ResourceKey=converter}}" />
             </Grid>
         </Grid>
     </Grid>
