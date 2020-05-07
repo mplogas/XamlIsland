@@ -114,6 +114,7 @@
     <Compile Include="ColorPickerControl.xaml.cs">
       <DependentUpon>ColorPickerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ColorPickerViewModel.cs" />
     <Compile Include="DummyPageControl.xaml.cs">
       <DependentUpon>DummyPageControl.xaml</DependentUpon>
     </Compile>

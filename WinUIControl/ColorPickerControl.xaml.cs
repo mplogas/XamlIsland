@@ -19,9 +19,12 @@ namespace WinUIControl
 {
     public sealed partial class ColorPickerControl : UserControl
     {
+        public ColorPickerViewModel ViewModel { get; private set; }
+
         public ColorPickerControl()
         {
             this.InitializeComponent();
+            this.ViewModel = new ColorPickerViewModel();
         }
     }
 }

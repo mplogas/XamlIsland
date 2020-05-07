@@ -59,7 +59,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="R" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.R, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="1" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -67,7 +67,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="G" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.G, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="2" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -75,7 +75,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="B" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.B, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Column="3" Margin="0,0,2,0" Background="#141414">
                 <Grid.ColumnDefinitions>
@@ -83,7 +83,7 @@
                     <ColumnDefinition Width="28"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Y" Style="{StaticResource SmallTextBoxLabel}" />
-                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" />
+                <TextBox Grid.Column="1" Style="{StaticResource SmallTextBox}" Text="{x:Bind ViewModel.Y, Mode=TwoWay}" />
             </Grid>
         </Grid>
     </Grid>
