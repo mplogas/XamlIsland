@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project TreatAsLocalProperty="OutDir;IntDir" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- This file is automatically imported by MSBuild for each project in under this folder, 
+         see https://docs.microsoft.com/en-us/visualstudio/msbuild/customize-your-build -->
+
+    <!-- 
+        Continue importing Directory.Build.props from parent directories.
+        NOTE: Do not remove this as PackageES requires this to import Xes.props.
+    -->
+    <Import Condition="Exists($([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../')))" Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+    <!--
+        Don't copy references and project references to the output folder,
+        unless this is an application and we need them.
+        This works around the issue where mdmerge finds the same winmd
+        in multiple output folders.
+    -->
+    <ItemDefinitionGroup>
+        <ProjectReference>
+            <Private Condition="'$(ConfigurationType)' != 'Application'">false</Private>
+        </ProjectReference>
+        <Reference>
+            <Private Condition="'$(ConfigurationType)' != 'Application'">false</Private>
+        </Reference>
+    </ItemDefinitionGroup>
+
+</Project>

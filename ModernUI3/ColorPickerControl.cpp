@@ -12,6 +12,7 @@ using namespace winrt::Windows::Foundation;
 using namespace winrt::Windows::Foundation::Numerics;
 
 using namespace winrt::Microsoft::UI;
+using namespace winrt::Microsoft::UI::Xaml;
 using namespace winrt::Microsoft::UI::Xaml::Input;
 using namespace winrt::Microsoft::UI::Xaml::Media;
 using namespace winrt::Microsoft::UI::Xaml::Media::Imaging;
@@ -51,8 +52,8 @@ namespace winrt::ModernUI3::implementation
 	ColorPickerControl::ColorPickerControl()
 	{		
 		InitializeComponent();
-		SizeChanged({ this,&ColorPickerControl::OnSizeChanged });
-		Tapped({ this,&ColorPickerControl::OnTapped });
+		interactiveArea().SizeChanged({ this,&ColorPickerControl::InteractiveAreaSizeChanged });
+		interactiveArea().Tapped({ this,&ColorPickerControl::InteractiveAreaTapped });
 		pickerPositionMarker().ManipulationMode(ManipulationModes::TranslateX | ManipulationModes::TranslateY);
 		pickerPositionMarker().ManipulationStarted({this,&ColorPickerControl::OnPositionManipulationStarted});
 		pickerPositionMarker().ManipulationDelta({ this,&ColorPickerControl::OnPositionManipulationDelta });
@@ -64,7 +65,7 @@ namespace winrt::ModernUI3::implementation
 		pickerSizeMarker().ManipulationCompleted({this, &ColorPickerControl::OnSizeManipulationCompleted});
 	}
 
-	void ColorPickerControl::OnSizeChanged(winrt::Windows::Foundation::IInspectable const&, winrt::Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
+	void ColorPickerControl::InteractiveAreaSizeChanged(winrt::Windows::Foundation::IInspectable const&, winrt::Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
 	{
 		float halfSize = (float) std::min(args.NewSize().Width, args.NewSize().Height) / 2;
 		_middlePoint = { args.NewSize().Width / 2, args.NewSize().Height / 2 };
@@ -95,9 +96,9 @@ namespace winrt::ModernUI3::implementation
 	}
 
 	/* When tapped update the color picker location if that is within the interactive area */
-	void ColorPickerControl::OnTapped(winrt::Windows::Foundation::IInspectable const& , winrt::Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& args)
+	void ColorPickerControl::InteractiveAreaTapped(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::TappedRoutedEventArgs const& args)
 	{
-		auto tapPosition = args.GetPosition(*this);
+		auto tapPosition = args.GetPosition(sender.as<UIElement>());
 		if (distance(tapPosition,_middlePoint) < _interactiveAreaRadius) {
 			UpdatePickerPosition(tapPosition - _middlePoint);
 			UpdateProperties();

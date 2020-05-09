@@ -2,7 +2,7 @@
 namespace ModernUI3
 {
 	[default_interface]
-	runtimeclass ColorPickerControl : Microsoft.UI.Xaml.Controls.Panel
+	runtimeclass ColorPickerControl : Microsoft.UI.Xaml.Controls.UserControl
 	{
 		ColorPickerControl();
 		
