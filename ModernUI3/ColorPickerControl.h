@@ -1,4 +1,5 @@
 #pragma once
+#include "ColorValueConverter.h"
 #include "ColorPickerControl.g.h"
 
 #pragma warning( disable : 4324 )
@@ -15,6 +16,8 @@ namespace winrt::ModernUI3::implementation
         static Microsoft::UI::Xaml::DependencyProperty _rProperty;
         static Microsoft::UI::Xaml::DependencyProperty _gProperty;
         static Microsoft::UI::Xaml::DependencyProperty _bProperty;
+        static Microsoft::UI::Xaml::DependencyProperty _yProperty;
+        static Microsoft::UI::Xaml::DependencyProperty _headerProperty;
 
         /* Helper constructor functions */
         winrt::Microsoft::UI::Xaml::Media::TranslateTransform make_translate_transform(winrt::Windows::Foundation::Numerics::float2 translate);
@@ -52,10 +55,14 @@ namespace winrt::ModernUI3::implementation
 
 
         static void OnRGBValueChanged(Microsoft::UI::Xaml::DependencyObject const& d, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
+        static void OnYValueChanged(Microsoft::UI::Xaml::DependencyObject const& d, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e);
 
         static Microsoft::UI::Xaml::DependencyProperty RProperty();
         static Microsoft::UI::Xaml::DependencyProperty GProperty();
         static Microsoft::UI::Xaml::DependencyProperty BProperty();
+        static Microsoft::UI::Xaml::DependencyProperty YProperty();
+        static Microsoft::UI::Xaml::DependencyProperty HeaderProperty();
+
 
         double R();
         void R(double value);
@@ -63,6 +70,11 @@ namespace winrt::ModernUI3::implementation
         void G(double value);
         double B();
         void B(double value);
+        double Y();
+        void Y(double value);
+        hstring Header();
+        void Header(hstring value);
+
         void Marker_PointerEntered(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
         void Marker_PointerExited(winrt::Windows::Foundation::IInspectable const& sender, winrt::Microsoft::UI::Xaml::Input::PointerRoutedEventArgs const& e);
     };

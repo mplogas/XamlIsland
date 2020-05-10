@@ -13,13 +13,16 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
     <ClCompile Include="ColorPickerControl.cpp" />
+    <ClCompile Include="ColorValueConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="ColorPickerControl.h" />
+    <ClInclude Include="ColorValueConverter.h" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="ColorPickerControl.idl" />
+    <Midl Include="ColorValueConverter.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ModernUI3.def" />

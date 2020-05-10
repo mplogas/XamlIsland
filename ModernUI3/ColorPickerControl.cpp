@@ -49,6 +49,23 @@ namespace winrt::ModernUI3::implementation
 			Microsoft::UI::Xaml::PropertyChangedCallback{ &ColorPickerControl::OnRGBValueChanged } }
 	);
 
+	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::_yProperty =
+		Microsoft::UI::Xaml::DependencyProperty::Register(
+			L"Y",
+			winrt::xaml_typename<double>(),
+			winrt::xaml_typename<ModernUI3::ColorPickerControl>(),
+			Microsoft::UI::Xaml::PropertyMetadata{ winrt::box_value(0.0),
+			Microsoft::UI::Xaml::PropertyChangedCallback{ &ColorPickerControl::OnYValueChanged } }
+	);
+
+	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::_headerProperty =
+		Microsoft::UI::Xaml::DependencyProperty::Register(
+			L"Header",
+			winrt::xaml_typename<hstring>(),
+			winrt::xaml_typename<ModernUI3::ColorPickerControl>(),
+			Microsoft::UI::Xaml::PropertyMetadata{ winrt::box_value(L"")  }
+	);
+
 	ColorPickerControl::ColorPickerControl()
 	{		
 		InitializeComponent();
@@ -67,6 +84,7 @@ namespace winrt::ModernUI3::implementation
 
 	void ColorPickerControl::InteractiveAreaSizeChanged(winrt::Windows::Foundation::IInspectable const&, winrt::Microsoft::UI::Xaml::SizeChangedEventArgs const& args)
 	{
+		auto newSize = args.NewSize();
 		float halfSize = (float) std::min(args.NewSize().Width, args.NewSize().Height) / 2;
 		_middlePoint = { args.NewSize().Width / 2, args.NewSize().Height / 2 };
 		_interactiveAreaRadius = (float) halfSize * InteractiveAreaDiameter;
@@ -228,16 +246,19 @@ namespace winrt::ModernUI3::implementation
 		_uiUpdatesSuspended = false;
 	}
 
+	// Any of the RGB values have changed. Update UI and recalculate Y value
 	void ColorPickerControl::UpdateUIFromRgb()
 	{
 		using namespace DirectX;
+		auto hsv = XMColorRGBToHSV(XMVectorSet((float)R(), (float)G(), (float)B(), 1.0f));
 		if (!_uiUpdatesSuspended) {
-			_hsvCurrentColor = XMColorRGBToHSV(XMVectorSet((float) R(), (float) G(), (float) B(),1.0f));
+			_hsvCurrentColor = hsv;
 			float angle = 2 * Pi * (XMVectorGetX(_hsvCurrentColor)-0.25f);
 			float length = _interactiveAreaRadius * XMVectorGetZ(_hsvCurrentColor);
 			UpdatePickerPosition( { length * cos(angle), length * sin(angle) });
 			UpdatePickerSize();
 		}
+		Y(XMVectorGetY(hsv));
 	}
 
 	
@@ -250,6 +271,15 @@ namespace winrt::ModernUI3::implementation
 			control->UpdateUIFromRgb();
 		}
 	}
+
+	void ColorPickerControl::OnYValueChanged(Microsoft::UI::Xaml::DependencyObject const& d, Microsoft::UI::Xaml::DependencyPropertyChangedEventArgs const& e)
+	{
+		using namespace DirectX;
+		if (ModernUI3::ColorPickerControl picker{ d.try_as<ModernUI3::ColorPickerControl>() })
+		{
+			auto control{ get_self<ColorPickerControl>(picker) };
+		}
+	}
 	
 	double ColorPickerControl::R()
 	{
@@ -257,7 +287,7 @@ namespace winrt::ModernUI3::implementation
 	}
 	void ColorPickerControl::R(double value)
 	{
-		SetValue(_rProperty, box_value<double>(value));
+		SetValue(_rProperty, box_value(value));
 	}
 	double ColorPickerControl::G()
 	{
@@ -265,7 +295,7 @@ namespace winrt::ModernUI3::implementation
 	}
 	void ColorPickerControl::G(double value)
 	{
-		SetValue(_gProperty, box_value<double>(value));
+		SetValue(_gProperty, box_value(value));
 	}
 	double ColorPickerControl::B()
 	{
@@ -273,7 +303,25 @@ namespace winrt::ModernUI3::implementation
 	}
 	void ColorPickerControl::B(double value)
 	{
-		SetValue(_bProperty, box_value<double>(value));
+		SetValue(_bProperty, box_value(value));
+	}
+	double ColorPickerControl::Y()
+	{
+		return unbox_value<double>(GetValue(_yProperty));
+	}
+	void ColorPickerControl::Y(double value)
+	{
+		SetValue(_yProperty, box_value(value));
+	}
+
+	hstring ColorPickerControl::Header()
+	{
+		return unbox_value<hstring>(GetValue(_headerProperty));
+	}
+
+	void ColorPickerControl::Header(hstring value)
+	{
+		SetValue(_headerProperty, box_value(value));
 	}
 
 	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::RProperty()
@@ -289,6 +337,15 @@ namespace winrt::ModernUI3::implementation
 	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::BProperty()
 	{
 		return _bProperty;
+	}
+	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::YProperty()
+	{
+		return _yProperty;
+	}
+
+	Microsoft::UI::Xaml::DependencyProperty ColorPickerControl::HeaderProperty()
+	{
+		return _headerProperty;
 	}
 
 	winrt::Microsoft::UI::Xaml::Media::TranslateTransform ColorPickerControl::make_translate_transform(winrt::Windows::Foundation::Numerics::float2 translate)

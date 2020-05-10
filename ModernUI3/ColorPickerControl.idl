@@ -9,10 +9,14 @@ namespace ModernUI3
 		static Microsoft.UI.Xaml.DependencyProperty RProperty{ get; };
 		static Microsoft.UI.Xaml.DependencyProperty GProperty{ get; };
 		static Microsoft.UI.Xaml.DependencyProperty BProperty{ get; };
-		
+		static Microsoft.UI.Xaml.DependencyProperty YProperty{ get; };
+		static Microsoft.UI.Xaml.DependencyProperty HeaderProperty{ get; };
 
 		Double R;
 		Double G;
 		Double B;
+		Double Y;
+
+		String Header;
 	}
 }
